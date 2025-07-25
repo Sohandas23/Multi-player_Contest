@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,18 +8,26 @@ namespace SheepScripts {
 	public class BattleManager : MonoBehaviour {
 		public SheepFighter ramA, ramB;
 		public Text battleTimerText;
+		public TMP_Text alertTxt;
 		public Transform winnerHolder;
-		public GameObject winnerItem,winningPanel;
+		public GameObject winnerItem,winningPanel,alertPanel,fightPanel;
+		public Button restartButton,exitToLobby;
 		
-
-		//public HealthBarUI healthBarA, healthBarB;
-		//public TextMeshProUGUI resultText;
-		// Start is called before the first frame update
-		private void Start()
+		
+		private IEnumerator Start()
 		{
+			
+			restartButton.onClick.AddListener(RestartGame);
+			exitToLobby.onClick.AddListener(ExitToLobby);
+			alertTxt.text = "Let's Begin the fight";
+			yield return new WaitForSeconds(2f);
+			alertTxt.text = "";
+			alertPanel.SetActive(false);
+			fightPanel.SetActive(true);
 			ramA.sheepName.text = $"First Sheep";
 			ramB.sheepName.text = $"Second Sheep";
 			StartCoroutine(FightRoutine());
+			
 			
 		}
 			
@@ -75,9 +84,14 @@ namespace SheepScripts {
 			winningPanel.SetActive(true);
 		}
 
-		public void RestartGame()
+		private void RestartGame()
 		{
-			//SceneManager.LoadScene("");
+			NavigationManager.Instance.LoadSheepScene();
 		}
+		private void ExitToLobby()
+		{
+			NavigationManager.Instance.LoadSplashScene();
+		}
+		
 	}
 }

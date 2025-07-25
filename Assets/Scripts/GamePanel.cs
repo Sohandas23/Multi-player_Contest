@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GamePanel : MonoBehaviourPunCallbacks {
 	public Text timerText;
@@ -17,10 +19,22 @@ public class GamePanel : MonoBehaviourPunCallbacks {
 	public GameObject resultPlayerItemPrefab;
 	private PhotonView photonView;
 	private float _roundStartTime;
+	public Button lobbyBtn;
 
 	private void Awake() {
 		photonView = GetComponent<PhotonView>();
 	}
+
+	private void Start()
+	{
+		lobbyBtn.onClick.AddListener(BackToLobby);
+	}
+
+	private void BackToLobby()
+	{
+		NavigationManager.Instance.LoadSplashScene();
+	}
+
 
 	public void StartNewRound() {
 		foldButton.interactable = true;
