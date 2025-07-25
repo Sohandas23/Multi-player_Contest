@@ -6,17 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+
 public class SheepFighter : MonoBehaviour {
 	public int maxHealth = 100;
 	public int currentHealth;
 	public Animator animator;
-	public Transform hitEffectSpawn;
-	public GameObject damagePopupPrefab;
-	public string FastWalking = "trot_forward";
-	public string Running = "run_forward";
 	public float moveTowardsSpeed, moveBackwardsSpeed;
 	public Image healthBar;
 	private Text _damageText;
+	public Text sheepName;
 
 
 	public event Action<int> OnDamageTaken;

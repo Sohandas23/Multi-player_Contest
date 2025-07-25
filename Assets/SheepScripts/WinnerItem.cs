@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class WinnerItem : MonoBehaviour
+namespace SheepScripts
 {
-    // Start is called before the first frame update
-    void Start()
+    public class WinnerItem : MonoBehaviour
     {
+        public Text winnerName;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void SetWinner(string sheepName) {
+            winnerName.text = $"Winner: {sheepName}";
+        }
     }
 }
